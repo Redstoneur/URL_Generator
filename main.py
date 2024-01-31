@@ -1,3 +1,4 @@
+import argparse
 import tkinter as tk
 from urllib.parse import quote
 
@@ -43,7 +44,37 @@ class URLConverterApp:
         pyperclip.copy(converted_url)
 
 
-if __name__ == "__main__":
+def run_gui():
     root = tk.Tk()
     app = URLConverterApp(root)
     root.mainloop()
+
+
+def run_command_line(url: str):
+    try:
+        converted_url = quote(url, safe=':/?=&')
+        print(f"URL convertie: {converted_url}")
+        pyperclip.copy(converted_url)
+    except Exception as e:
+        print(f"Erreur: {str(e)}")
+
+
+if __name__ == "__main__":
+    programe_name = "URL Generator"
+    program_version = "v1.0.0"
+    program_description = "Convertir une URL en langage standard"
+
+    parser = argparse.ArgumentParser(description=f"{programe_name} : {program_description}")
+    parser.add_argument("-c", "--cli", help="Run in Command Line Mode", action="store_true")
+    parser.add_argument("-u", "--url", help="URL to convert (Command Line Mode Only)", default=None)
+    parser.add_argument("-v", "--version", action="version", version=f"{programe_name} [%(prog)s] : {program_version}")
+
+    args = parser.parse_args()
+
+    if args.cli:
+        url: str = args.url
+        while url is None:
+            url = input("URL à convertir: ")
+        run_command_line(url)
+    else:
+        run_gui()
