@@ -5,24 +5,24 @@ from urllib.parse import quote
 import pyperclip
 
 
-class URLConverterApp:
-    def __init__(self, master):
-        self.master = master
-        master.title("URL Converter")
+class URLConverterApp(tk.Tk):
+    def __init__(self):
+        super().__init__()
+        self.title("URL Converter")
 
-        self.label = tk.Label(master, text="Entrez l'URL:")
+        self.label = tk.Label(self, text="Entrez l'URL:")
         self.label.pack()
 
-        self.url_entry = tk.Entry(master, width=40)
+        self.url_entry = tk.Entry(self, width=40)
         self.url_entry.pack()
 
-        self.convert_button = tk.Button(master, text="Convertir", command=self.convert_url)
+        self.convert_button = tk.Button(self, text="Convertir", command=self.convert_url)
         self.convert_button.pack()
 
-        self.result_label = tk.Label(master, text="")
+        self.result_label = tk.Label(self, text="")
         self.result_label.pack()
 
-        self.copy_button = tk.Button(master, text="Copier", command=self.copy_to_clipboard)
+        self.copy_button = tk.Button(self, text="Copier", command=self.copy_to_clipboard)
         self.copy_button.pack()
 
     def convert_url(self):
@@ -45,14 +45,13 @@ class URLConverterApp:
 
 
 def run_gui():
-    root = tk.Tk()
-    app = URLConverterApp(root)
+    root = URLConverterApp()
     root.mainloop()
 
 
-def run_command_line(url: str):
+def run_command_line(url_str: str):
     try:
-        converted_url = quote(url, safe=':/?=&')
+        converted_url = quote(url_str, safe=':/?=&')
         print(f"URL convertie: {converted_url}")
         pyperclip.copy(converted_url)
     except Exception as e:
@@ -60,14 +59,14 @@ def run_command_line(url: str):
 
 
 if __name__ == "__main__":
-    programe_name = "URL Generator"
-    program_version = "v1.0.0"
+    program_name = "URL Generator"
+    program_version = "v1.0.1"
     program_description = "Convertir une URL en langage standard"
 
-    parser = argparse.ArgumentParser(description=f"{programe_name} : {program_description}")
+    parser = argparse.ArgumentParser(description=f"{program_name} : {program_description}")
     parser.add_argument("-c", "--cli", help="Run in Command Line Mode", action="store_true")
     parser.add_argument("-u", "--url", help="URL to convert (Command Line Mode Only)", default=None)
-    parser.add_argument("-v", "--version", action="version", version=f"{programe_name} [%(prog)s] : {program_version}")
+    parser.add_argument("-v", "--version", action="version", version=f"{program_name} [%(prog)s] : {program_version}")
 
     args = parser.parse_args()
 
