@@ -1,5 +1,12 @@
 # URL Generator
 
+![License](https://img.shields.io/github/license/Redstoneur/URL_Generator)
+![Top Language](https://img.shields.io/github/languages/top/Redstoneur/URL_Generator)
+![Build Status](https://img.shields.io/github/actions/workflow/status/Redstoneur/URL_Generator/build-and-publish.yml)
+![Latest Release](https://img.shields.io/github/v/release/Redstoneur/URL_Generator)
+![Release Date](https://img.shields.io/github/release-date/Redstoneur/URL_Generator)
+![Last Commit](https://img.shields.io/github/last-commit/Redstoneur/URL_Generator)
+
 URL Generator est un petit programme Python 3.8 qui permet de convertir une URL en sa version encodée en pourcentage et
 de la copier dans le presse-papiers. Le programme offre deux modes d'utilisation : une interface graphique utilisateur
 (GUI) basée sur Tkinter et une interface en ligne de commande (CLI) utilisant argparse.
